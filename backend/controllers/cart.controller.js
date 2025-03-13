@@ -5,6 +5,7 @@ export const getCartProducts = async (req, res) => {
     const products = await Product.find({_id: {$in: req.user.cartItems}});    
 
     // add quantity for each product
+    // mongoose product.id == product._id
     const cartItems = products.map(product => {
       const item = req.user.cartItems.find(cartItems => cartItems.id === product.id);
       return {...product.toJSON(), quantity:item.quantity}
